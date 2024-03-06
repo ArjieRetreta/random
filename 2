@@ -1,0 +1,16 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+int main(){
+	int number, timeValue;
+	timeValue = time(NULL);
+	srand(timeValue);
+	
+	for(int x = 0; x < 20; x++){
+		number = rand();
+		cout<<"Number"<<endl<<x<<"Random"<<endl;
+		cout<<number<<"\n"<<endl;
+	}
+}
