@@ -1,0 +1,47 @@
+class HelloWorld {
+    public static void main(String[] args) {
+     //ex 2
+        if(-44>100){
+        System.out.println("Hi");
+    }
+    else{
+        System.out.println("Hello");
+    }
+    //ex 3
+    int x = 100;
+    if(x == 2){
+        System.out.println("First");
+    }
+    else if(x >=10){
+        System.out.println("Second");
+    }
+    else{
+        System.out.println("Third");
+    }
+   //ex 4
+     String result = (4 > 2)?"good":"bad";
+     System.out.println(result);
+    
+    
+        int day = 50;
+        switch(day){
+            case 1:
+            System.out.println("men");
+             break;
+             case 2:
+             System.out.println("teu");
+             break;
+             default:
+             System.out.println("invalid input");
+        }
+        int n = 0;
+         while(2>n){
+        System.out.println("Hi");
+        n++;
+    } 
+    int x = 0;
+    while(x<3){
+    }
+
+    }
+
