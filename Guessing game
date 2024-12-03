@@ -1,0 +1,56 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String wordToGuess = "EXAMPLEWORD"; 
+        char[] guessedLetters = new char[wordToGuess.length()];
+        for (int i = 0; i < guessedLetters.length; i++) {
+            guessedLetters[i] = '_'; 
+        }
+
+        int lives = 3;
+        boolean wordGuessed = false;
+
+        System.out.println("Welcome to the Word Guessing Game!");
+        System.out.println("You need to guess the 11-letter word.");
+        System.out.println("You have " + lives + " lives.");
+        System.out.println("Word: " + String.valueOf(guessedLetters));
+
+        while (lives > 0 && !wordGuessed) {
+            System.out.print("Guess a letter: ");
+            char guessedLetter = scanner.next().toUpperCase().charAt(0);
+
+            boolean correctGuess = false;
+            for (int i = 0; i < wordToGuess.length(); i++) {
+                if (wordToGuess.charAt(i) == guessedLetter) {
+                    guessedLetters[i] = guessedLetter; 
+                    correctGuess = true;
+                }
+            }
+
+            if (!correctGuess) {
+                lives--;
+                System.out.println("Incorrect guess! Lives left: " + lives);
+            }
+
+            System.out.println("Current word: " + String.valueOf(guessedLetters));
+
+            wordGuessed = true;
+            for (char c : guessedLetters) {
+                if (c == '_') {
+                    wordGuessed = false;
+                    break;
+                }
+            }
+        }
+
+        if (wordGuessed) {
+            System.out.println("Congratulations! You've guessed the word: " + wordToGuess);
+        } else {
+            System.out.println("Game over! The word was: " + wordToGuess);
+        }
+
+        scanner.close();
+    }
+}
