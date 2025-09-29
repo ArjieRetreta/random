@@ -42,7 +42,7 @@ Bldg-2(config)#banner motd "Authorized Access Only!"
 
 Bldg-2(config)#service pass
 
-Bldg-2(config)#int 30/0/1
+Bldg-2(config)#int s0/0/1
 
 Bldg-2(config-if)#bandwidth 128
 
