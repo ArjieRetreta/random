@@ -43,3 +43,45 @@ Bidg-1(config-line)#logging synch
 Bldg-1(config-line)#exit
 
 Bldg-1(config)#int s0/0/0
+
+Bldg-1(config-if)#desc "Outbound; to Main'
+
+Bldg-1(config-if)#ip add 192.168.100.22 255.255.255.252
+
+Bldg-1(config-if)#ip ospf cost 7500
+
+Bldg-1(config-if)#ip ospf message-digest-key 1 md5 xyz_OSPF
+
+Bldg-1(config-if)#ip ospf authentication message-digest
+
+Bldg-1(config-if)#no sh
+
+Bldg-1(config-if)#exit
+
+Bldg-1(config)#int g0/1
+
+Bldg-1(config-if)#ip add 192.168.9.1 255.255.255.0
+
+Bldg-1(config-if)#desc "To LAN 'Lab B-2'."
+
+Bldg-1(config-if)#no sh
+
+Bldg-1(config-if)#exit
+
+Bldg-1(config)#router ospf 1
+
+Bldg-1(config-router)#router-id 1.1.1.1
+
+Bldg-1 (config-router)#area 0 authentication message-digest
+
+Bldg-1(config-router) #network 192.168.100.20 0.0.0.3 area 0
+
+Bldg-1 (config-router) #network 192.168.8.0 0.0.0.255 area 1
+
+Bldg-1 (config-router) #network 192.168.9.0 0.0.0.255 area 1
+
+Bldg-1 (config-router) #passive-interface g0/0
+
+Bldg-1 (config-router)#passive-interface g0/1
+
+Bldg-1(config-router)#exit
