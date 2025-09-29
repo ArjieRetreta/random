@@ -1,0 +1,185 @@
+Routerven
+
+Router #conft
+
+Router(config)#hostname Bidg-2
+
+Bldg-2(config)#no ip domain-lookup
+
+Bldg-2(config)#enable secret class
+
+Bldg-2(config)#line vty 0 14
+
+Bldg-2(config-line)#password cisco
+
+Bldg-2(config-line)#logging synch
+
+Bldg-2(config-line)#login
+
+Bldg-2(config-line)#exit
+
+Bldg-2(config)#line console O
+
+Bldg-2(config-line)#password cisco
+
+Bldg-2(config-line)#logging synch
+
+Bldg 2(config-line)#login
+
+Bldg-2(config-line)#exit
+
+Bldg-2(config)#line aux 0
+
+Bldg-2(config-line)#password cisco
+
+Bldg-2(config-line)#logging synch
+
+Bldg-2(config-line)#login
+
+Bldg-2(config-line)#exit
+
+Bldg-2(config)#banner motd "Authorized Access Only!"
+
+Bldg-2(config)#service pass
+
+Bldg-2(config)#int 30/0/1
+
+Bldg-2(config-if)#bandwidth 128
+
+Bldg-2(config-if)#ip add 192.168.100.38 255.255.255.252
+
+Bidg-2(config-if)#desc "Outbound; Main"
+
+Bldg-2(config-if)#ip ospf message-digest-key 1 md5 xyz OSPF
+
+Bldg-2(config-if)#ip ospf authentication message-digest
+
+Bldg-2(config-if)#no sh
+
+Bldg-2(config-if)#exit
+
+Bldg-2(config)#int 90/1
+
+Bldg-2(config-if)#no sh
+
+Bldg-2(config-if)#exit
+
+Bldg-2(config)#int g0/1.2
+
+Bldg-2(config-sub if)#encapsulation dot1q2
+
+Bldg-2(config-sub if)#ip add 10.10.2.1 255.255.255.0
+
+Bldg-2(config-sub if)#exit
+
+Bidg-2(config)#int g0/1.4
+
+Bldg-2(config-sub if)#encapsulation dot1q 4
+
+Bldg-2(config-sub if)#ip add 10.10.4.1 255.255.255.0
+
+Bidg-2(config-sub if)#exit
+
+Bldg-2(config)#int 90/1.8
+
+Bldg-2(config-sub if)#encapsulation dot1q 8
+
+Bldg-2(config-sub if)#ip add 10.10.8.1 255.255.255.0
+
+Bldg-2(config-sub if) Nexit
+
+Bldg-2(config)#int g0/1.15
+
+Bldg-2(config-sub if)#encapsulation dot1q 15
+
+Bldg-2(config-sub if)#ip add 10.10.15.1 255.255.255.0
+
+Bldg-2(config-sub if)#exit
+
+Bldg-2(config)#int 90/1.25
+
+Bldg-2(config-sub if)#encapsulation dot1q 25
+
+Bldg-2(config-sub if)#ip add 10.10.25.1 255.255.255.0
+
+Bldg-2(config-sub if)#exit
+
+Bldg-2(config)#router ospf 1
+
+Bldg-2(config-router) #router id 3.3.3.3
+
+Blig-2(config-router)#passive-int g0/1
+
+Bldg-2(config-router)#network 192.168.100.36 0.0.0.3 area 0
+
+Bldg-2(config-router)#network. 10.10.2.0 0.0.0.255 area 2
+
+Bldg-2(config-router) #network 10.10.2.0.0.0.0.255 area 2
+
+Bldg-2(config-router)#network 10.10.4.0 0.0.0.255 aree 2
+
+Bldg-2(config-router)#network 10.10.8.0.0.0.0.255 area 2
+
+Bldg-2(config-router)#network 10.10.15.0 0.0.0.255 area 2
+
+Bldg-2(config-router)#no auto-summary
+
+Bldg-2(config-router) #passive-int g0/1.2
+
+Bldg-2(config-router)#passive-nt g0/1.4
+
+Bldg-2(config-router)#passive-int g0/1.8
+
+Bldg-2(config-router) #passive-int g0/1.15
+
+Bldg-2(config-router)#exit
+
+Bldg-2(config)#int s0/0/1
+
+Bldg-2(config-if)#ip summary-address eigrp 100 10.10.0.0 255.255.240.0
+
+Bidg-2(config-if)#exit
+
+Bldg-2(config)#ip dhop excluded-address 10.10.21 10.10.2.5
+
+Bldg-2(config)#ip dhcp excluded-address 10.10.4.1 10.10.4.5.
+
+Bldg-2(config)#ip dhcp excluded address 10.10.8.1 10.10.8.5.
+
+Bldg-2(config)#ip dhcp pool vlan2pool
+
+Bldg-2(dhop-config)#network 10.10.2.0 255.255.255.0
+
+Bidg-2(dhcp-config)#default-router 10.10.21
+
+Bidg-2(dhcp-config)#dns-server 192.168.200.225
+
+Bldg-2(dhcp-config)#ip dhcp pool vian4pool
+
+Bldg-2(dhcp-config)#network 10.10.4.0.255.255.255.0
+
+Bldg-2(dhcp-config)#default-router 10.10.4.1
+
+Bldg-2(dhcp-config)#dns server 192.168.200.225
+
+Bldg-2(dhcp-config)#ip dhcp pool vianspool
+
+Bldg-2(dhcp-config)#network 10.10.8.0.255.255.255.0
+
+Bldg-2(dhcp-config)#default-router 10.10.8.1
+
+Bldg-2(dhcp-config)#dns-server 192.168.200.225
+
+Bldg-2(dhcp-config)#exit
+
+Bldg-2(config)#access-list 1 permit 10.10.15.0 0.0.0.255
+
+Bldg-2(config)#interface g0/1.25
+
+Bidg-2(config-sub if)#ip access-group 1 out
+
+Bldg-2(config-sub if)#exit
+
+Bldg-2(config)#exit
+
+Bldg-2#
