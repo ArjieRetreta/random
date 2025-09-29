@@ -1,0 +1,131 @@
+Main>en
+
+Main#conft
+
+Main(config)#hostname Main
+
+Main(config)#no ip domain-lookup
+
+Main(config)#enable secret class
+
+Main(config)#line vty 0 14
+
+Main(config-line)#password cisco
+
+Main(config-line)#logging synch
+
+Main(config-line)#login
+
+Main(config-line)#exit
+
+Main(config)#line console 0
+
+Main(config-line)#password cisco
+
+Main(config-line)#logging synch
+
+Main(config-line)#login
+
+Main(config-line)#exit
+
+Main(config)#line aux 0
+
+Main(config-line)#password cisco
+
+Main(config-line)#logging synch
+
+Main (config-line)#login
+
+Main(config-line)#exit
+
+Main (config)#banner motd "Authorized access only!"
+
+Main(config)#service pass
+
+Main(config)#ip route 0.0.0.0 0.0.0.0 S0/1/0
+
+Main(config)#int S0/0/0
+
+Main(config-if)#bandwidth 128
+
+Main(config-if)#ip add 192.168.100.21 255.255.255.252
+
+Main(config-if)#desc "Outbound; Bldg-1"
+
+Main(config-if)#ip ospf cost 7500
+
+Main(config-if)#ip ospf message-digest-key 1 md5 xyz_OSPF
+
+Main(config-if)#ip ospf authentication message-digest
+
+Main(config-if)#no sh
+
+Main(config-if)#exit
+
+Main(config)#int s0/0/1
+
+Main(config-if)#bandwidth 128
+
+Main(config-if)#ip add 192.168.100.37 255.255.255.252
+
+Main(config-if)#desc "Outbound; Bldg-2"
+
+Main(config-if)#clock rate 128000
+
+Main(config-if)#ip ospf message-digest-key 1 md5 xyz_OSPF
+
+Main(config-if)#ip ospf authentication message-digest
+
+Main(config-if)#no sh
+
+Main(config-if)#exit
+
+Main(config)#int s0/1/0
+
+Main(config-if)#bandwidth 128
+
+Main(config-if)#ip add 203.0.113.18 255.255.255.248
+
+Main(config-if)#desc "Outbound; Internet"
+
+Main(config-if)#no sh
+
+Main(config-if)#exit
+
+Main(config)#router ospf 1
+
+Main(config-router) #router-id 2.2.2.2
+
+Main(config-router) #router-id 2.2.2.2
+
+Main(config-router)#area 0 authentication message-digest
+
+Main(config-router)#default-information originate
+
+Main(config-router)#network 192.168.100.20 0.0.0.3 area 0
+
+Main(config-router)#network 192.168.100.36 0.0.0.3 area 0
+
+Main(config-router) #passive-int s0/1/0
+
+Main(config-router)#exit
+
+Main(config)#ip access-list standard telnetBlock
+
+Main(config-std-nacl) #permit host 198.51.100.5
+
+Main(config-std-nacl) #line vty 0 15
+
+Main(config-line)#access-class telnetBlock in
+
+Main(config-line)#exit
+
+Main(config)#int s0/1/0
+
+Main(config-if)#ip access-group 101 in
+
+Main(config-if)#exit
+
+Main(config)#exit
+
+Main#wr
