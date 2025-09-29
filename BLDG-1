@@ -1,0 +1,45 @@
+Router>en
+
+Router#conft
+
+Router(config)#hostname Bldg-1
+
+Bldg-1(config)#no ip domain-lookup
+
+Bldg-1(config)#enable secret class
+
+Bldg-1(config)#line vty 0 14
+
+Bldg-1(config-line)#password cisco
+
+Bldg-1 (config-line)#login
+
+Bldg-1(config-line)#logging synch
+
+Bldg-1(config-line)#exit
+
+Bldg-1 (config)#line console 0
+
+Bldg-1(config-line)#password cisco
+
+Bldg-1(config-line)#logging synch
+
+Bldg-1 (config-line)#login
+
+Bldg-1(config-line)#exit
+
+Bldg-1(config)#banner motd "Authorized access only!"
+
+Bldg-1 (config)#service password
+
+Bldg-1(config)#line aux 0
+
+Bldg-1(config-line)#password cisco
+
+Bldg-1 (config-line)#login
+
+Bidg-1(config-line)#logging synch
+
+Bldg-1(config-line)#exit
+
+Bldg-1(config)#int s0/0/0
