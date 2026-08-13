@@ -1,0 +1,58 @@
+#USER INPUT#
+
+import matplotlib.pyplot as plt
+initial_population = int(input("Enter the initial population: "))
+growth_rate = float(input("Enter annual growth rate(%): "))
+
+growth_rate = growth_rate / 100
+
+years = int(input("Enter number of years to simulate: "))
+
+#INITIALIZE VARIABLES#
+
+population = initial_population
+
+year_list = [0]
+population_list = [population]
+
+print("\nPopulation Growth Simulation")
+print("-" * 45)
+print(f"{'Year':<10}{'Population'}")
+print("-" * 45)
+print(f"{0:<10}{population:,.0f}")
+
+#SIMULATION#
+
+for year in range(1, years + 1):
+
+    population = population + (growth_rate * population)
+
+    year_list.append(year)
+    population_list.append(population)
+
+    print(f"{year:<10}{population:,.0f}")
+
+#DISPLAY FINAL RESULT#
+
+print("\nSimulation Completed!")
+print(f"Initial Population : {initial_population:,}")
+print(f"Final Population   : {population:,.0f}")
+print(f"Growth Rate        : {growth_rate*100:.2f}%")
+print(f"years Simulated    : {years}")
+
+#PLOT POPULATION GROWTH#
+
+plt.figure(figsize=(10,5))
+
+plt.plot(year_list,
+        population_list,
+        marker='o',
+        linewidth=2)
+
+plt.title("population Growth Simulation")
+plt.xlabel("Year")
+plt.ylabel("Population")
+plt.grid(True)
+
+plt.tight_layout()
+plt.show()
